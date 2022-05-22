@@ -1,10 +1,22 @@
+package ru.itmo.lib;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public class SimpleMessage implements Serializable {
     private String sender;
     private String text;
     private LocalDateTime dateTime;
+    private UUID uuid;
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
+    }
 
     public SimpleMessage(String sender, String text) {
         this.sender = sender;
@@ -15,17 +27,11 @@ public class SimpleMessage implements Serializable {
         return sender;
     }
 
-    public void setSender(String sender) {
-        this.sender = sender;
-    }
 
     public String getText() {
         return text;
     }
 
-    public void setText(String text) {
-        this.text = text;
-    }
 
     public void setDateTime(){
         dateTime = LocalDateTime.now();
@@ -34,10 +40,11 @@ public class SimpleMessage implements Serializable {
 
     @Override
     public String toString() {
-        return "SimpleMessage{" +
+        return "ru.itmo.lib.SimpleMessage{" +
                 "sender='" + sender + '\'' +
                 ", text='" + text + '\'' +
                 ", dateTime=" + dateTime +
+                ", uuid=" + uuid +
                 '}';
     }
 
