@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class Client {
     private final Scanner scanner;
-    private static Connection connection;
+    private final Connection connection;
 
 
     public Client(int port, String ip) throws IOException {
