@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class Client {
     private final Scanner scanner;
-    private static Connection connection;
+    private final Connection connection;
     private SimpleMessage message;
 
 
@@ -34,7 +34,7 @@ public class Client {
                 System.out.println("Enter name");
                 String name = scanner.nextLine();
                 String messageText;
-                while (true) {
+                while (!Thread.currentThread().isInterrupted()) {
                     System.out.println("Enter message");
                     messageText = scanner.nextLine();
                     message = SimpleMessage.getMessage(name, messageText);
