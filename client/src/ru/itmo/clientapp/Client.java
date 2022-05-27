@@ -17,10 +17,10 @@ public class Client {
         this.scanner = new Scanner(System.in);
         connection = new Connection(new Socket(ip, port));
 
-        Thread sender = new Thread(new ClientSender());
+        ClientSender sender = new ClientSender();
         sender.setName("Client sender");
         sender.start();
-        Thread receiver = new Thread(new ClientReceiver());
+        ClientReceiver receiver = new ClientReceiver();
         receiver.setName("Client receiver");
         receiver.start();
 
