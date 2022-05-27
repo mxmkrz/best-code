@@ -17,11 +17,8 @@ public class Client {
     public Client(int port, String ip) throws IOException {
         this.scanner = new Scanner(System.in);
         connection = new Connection(new Socket(ip, port));
-        ClientSender sender = new ClientSender();
-        sender.start();
-        ClientReceiver receiver = new ClientReceiver();
-        receiver.start();
-
+        new ClientSender().start();
+        new ClientReceiver().start();
     }
 
     class ClientSender extends Thread {
