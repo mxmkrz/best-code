@@ -11,6 +11,7 @@ import java.util.Scanner;
 public class Client {
     private final Scanner scanner;
     private final Connection connection;
+    private SimpleMessage message;
 
 
     public Client(int port, String ip) throws IOException {
@@ -38,7 +39,7 @@ public class Client {
                 while (true) {
                     System.out.println("Enter message");
                     messageText = scanner.nextLine();
-                    SimpleMessage message = SimpleMessage.getMessage(name, messageText);
+                    message = SimpleMessage.getMessage(name, messageText);
                     connection.sendMessage(message);
                     if (message.getText().equalsIgnoreCase("break")) {
                         connection.close();
@@ -60,8 +61,8 @@ public class Client {
         public void run() {
             try {
                 while (!Thread.currentThread().isInterrupted()) {
-                    SimpleMessage formServer = connection.readMessage();
-                    System.out.println("New message: " + formServer.getText() + " from: " + formServer.getSender());
+                    message = connection.readMessage();
+                    System.out.println("New message: " + message.getText() + " from: " + message.getSender());
                     System.out.println(Thread.currentThread());
                 }
             } catch (IOException | ClassNotFoundException e) {
