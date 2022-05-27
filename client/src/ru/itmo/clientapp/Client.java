@@ -10,24 +10,25 @@ import java.util.Scanner;
 
 public class Client {
     private final Scanner scanner;
-    private final Connection connection;
+    private static Connection connection;
     private SimpleMessage message;
 
 
     public Client(int port, String ip) throws IOException {
         this.scanner = new Scanner(System.in);
         connection = new Connection(new Socket(ip, port));
-
         ClientSender sender = new ClientSender();
-        sender.setName("Client sender");
         sender.start();
         ClientReceiver receiver = new ClientReceiver();
-        receiver.setName("Client receiver");
         receiver.start();
 
     }
 
     class ClientSender extends Thread {
+
+        {
+            this.setName("Client sender");
+        }
 
 
         @Override
@@ -56,6 +57,9 @@ public class Client {
 
     class ClientReceiver extends Thread {
 
+        {
+            this.setName("Client receiver");
+        }
 
         @Override
         public void run() {
