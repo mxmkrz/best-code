@@ -10,17 +10,17 @@ import java.util.Scanner;
 
 public class Client {
     private final Scanner scanner;
-    private Connection connection;
+    private static Connection connection;
 
 
     public Client(int port, String ip) throws IOException {
         this.scanner = new Scanner(System.in);
-        this.connection = new Connection(new Socket(ip, port));
+        connection = new Connection(new Socket(ip, port));
 
-        Thread sender = new Thread(new ClientSender(connection));
+        Thread sender = new Thread(new ClientSender());
         sender.setName("Client sender");
         sender.start();
-        Thread receiver = new Thread(new ClientReceiver(connection));
+        Thread receiver = new Thread(new ClientReceiver());
         receiver.setName("Client receiver");
         receiver.start();
 
@@ -28,11 +28,6 @@ public class Client {
 
     class ClientSender extends Thread {
 
-        private Connection connection;
-
-        public ClientSender(Connection connection) {
-            this.connection = connection;
-        }
 
         @Override
         public void run() {
@@ -59,17 +54,13 @@ public class Client {
     }
 
     class ClientReceiver extends Thread {
-        private Connection connectionFromSender;
 
-        public ClientReceiver(Connection connection) {
-            this.connectionFromSender = connection;
-        }
 
         @Override
         public void run() {
             try {
                 while (!Thread.currentThread().isInterrupted()) {
-                    SimpleMessage formServer = connectionFromSender.readMessage();
+                    SimpleMessage formServer = connection.readMessage();
                     System.out.println("New message: " + formServer.getText() + " from: " + formServer.getSender());
                     System.out.println(Thread.currentThread());
                 }
