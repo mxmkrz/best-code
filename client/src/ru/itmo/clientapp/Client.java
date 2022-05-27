@@ -18,10 +18,10 @@ public class Client {
         this.connection = new Connection(new Socket(ip, port));
 
         Thread sender = new Thread(new ClientSender(connection));
-        sender.setName("ru.itmo.clientapp.Client sender");
+        sender.setName("Client sender");
         sender.start();
         Thread receiver = new Thread(new ClientReceiver(connection));
-        receiver.setName("ru.itmo.clientapp.Client receiver");
+        receiver.setName("Client receiver");
         receiver.start();
 
     }

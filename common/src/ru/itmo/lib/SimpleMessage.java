@@ -40,7 +40,7 @@ public class SimpleMessage implements Serializable {
 
     @Override
     public String toString() {
-        return "ru.itmo.lib.SimpleMessage{" +
+        return "SimpleMessage{" +
                 "sender='" + sender + '\'' +
                 ", text='" + text + '\'' +
                 ", dateTime=" + dateTime +
